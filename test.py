@@ -66,7 +66,7 @@ def connect_host(hosts, commands, luser, lpass):
                 try:
                     result = c.run(cmd, warn=True, hide=True)
                 except Exception as loginerror:
-                    print(f"{host} : {loginerror}")
+                    #print(f"{host} : {loginerror}")
                     cdata = {
                         host: loginerror
                     }
