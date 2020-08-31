@@ -13,8 +13,8 @@ parser = argparse.ArgumentParser(
     description='Description : To verify the access to the server and fetching some details')
 parser.add_argument(
     'serverlist', help='Text file containg server list')
+parser.add_argument('cmdlist', help='File containing list of commands to execute (one cmd per line)')
 parser.add_argument('emailto', help='TO Email ID(Comma separated)')
-parser.add_argument('--cmdlist','-c', help='File containing list of commands to execute (one cmd per line)')
 #parser.add_argument('--cmd', help='Single command to execute')
 
 args = parser.parse_args()
