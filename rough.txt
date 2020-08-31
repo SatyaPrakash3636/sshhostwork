@@ -1,0 +1,9 @@
+import getpass
+from fabric import Connection, Config
+sudo_pass = getpass.getpass("What's your user password?\n")
+config = Config(overrides={'user': '<host-user>', 'connect_kwargs': {'password': sudo_pass}})
+c = Connection('<host-ip>', config=config)
+c.run('uname -s')
+
+
+c = Connection(host="13.232.215.208", port=22, user="cloud_user", connect_timeout='5', connect_kwargs={'password': 'satya8392'})

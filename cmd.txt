@@ -1,0 +1,6 @@
+hostname
+uname -a
+whoami
+ps -ef | grep docker
+df -h
+ls -ltr ~/bin
