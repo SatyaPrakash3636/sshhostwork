@@ -15,7 +15,7 @@ parser.add_argument(
     'serverlist', help='Text file containg server list')
 parser.add_argument('emailto', help='TO Email ID(Comma separated)')
 parser.add_argument('--cmdlist','-c', help='File containing list of commands to execute (one cmd per line)')
-parser.add_argument('--cmd', help='Single command to execute')
+#parser.add_argument('--cmd', help='Single command to execute')
 
 args = parser.parse_args()
 #username = args.username.lower()
@@ -37,10 +37,11 @@ def read_input_file(inputfile):
 def html_start():
     with open('output.html', 'w') as f4:
         f4.write('<!DOCTYPE html> <html> <head> <meta name="description" content="Remote command execution Result"> <meta name="author" content="Satyaprakash Prasad"> ')
-        f4.write("<style> body { background-color: darkslategrey; color: Silver; font-size: 1.1em; } h1 { color: coral; } #intro { font-size: 1.3em; } .colorful { color: orange; } .myTable { width: 100%; text-align: left; background-color: lemonchiffon; border-collapse: collapse; } .myTable th { background-color: goldenrod; color: white; } .myTable td { padding: 2px; border: 1px solid goldenrod; color: black } .myTable th { padding: 2px; border: 1px solid goldenrod; } </style> </head>")
+        f4.write("<style> body { background-color: DarkSlateGray; color: Silver; font-size: 1.1em; } h1 { color: coral; } #intro { font-size: 1.3em; } .colorful { color: orange; } .myTable { width: 100%; text-align: left; background-color: lemonchiffon; border-collapse: collapse; } .myTable th { background-color: goldenrod; color: white; } .myTable td { padding: 2px; border: 1px solid goldenrod; color: black } .myTable th { padding: 2px; border: 1px solid goldenrod; } </style> </head>")
         f4.write('<body>')
         f4.write(
             '<h1>Below are the output of list of commands run against list of hosts</h1>')
+        f4.write(f'<p id="intro">Note: Kindly verify the output of commands before deciding scope</p>')
         f4.write('<br><br>')
 
 
@@ -56,6 +57,13 @@ def convert_to_html(data):
 def html_end():
     with open('output.html', 'a') as f4:
         f4.write('</body> </html>')
+    with open('output.html', 'rt') as f4:
+            htmldata = f4.read()
+            htmldata = htmldata.replace('<ul><li><table', '<table')
+            htmldata = htmldata.replace('</table></li></ul>', '</table>')
+            htmldata = htmldata.replace('</table></li><li>', '</table>')
+    with open('output.html', 'wt') as f4:
+        f4.write(htmldata)
 
 def connect_host(hosts, commands, luser, lpass):
     allhostdata = []
@@ -96,7 +104,7 @@ def send_email(toaddr, FileName):
     msg = MIMEMultipart('alternative')
     msg['From'] = fromaddr
     msg['To'] = toaddr
-    msg['Subject'] = "Keepass database search result"
+    msg['Subject'] = "Remote Execution Result"
 
     body = open(FileName).read()
     msg.attach(MIMEText(body, 'html'))
