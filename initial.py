@@ -12,7 +12,7 @@ import fileinput
 parser = argparse.ArgumentParser(
     prog='checkHostViaSSH', description='Description : To verify the access to the server and fetching some details')
 parser.add_argument('--version', '-v', action='version',
-                    version='%(prog)s 1.0')
+                    version='%(prog)s v1.0')
 parser.add_argument(
     'serverlist', help='Text file containg server list')
 parser.add_argument(
