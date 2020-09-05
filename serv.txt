@@ -1,0 +1,10 @@
+35.154.197.203
+thisServerDontexist
+13.232.198.204
+nosuchserver
+15.206.210.212
+dummyserver
+15.207.116.250
+servernotworking
+notworking
+server2
